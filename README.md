@@ -41,21 +41,6 @@ In this contract, the `withdraw()` function can be called by anyone who has a ba
 
 In the K Framework, we define rules using the K syntax, which is a formal specification language for describing the semantics of programming languages. The K rule will enforce that only the contract owner can call the `withdraw()` function.
 
-Here’s the corresponding K rule:
-
-```k
-module ACCESS_CONTROL
-  syntax Exp ::= "withdraw" "(" Exp "," Exp ")"  [function]
-  rule <k> withdraw(Amt, _) => . ... </k>
-       <env> .[msg.sender] = owner </env> // Check that msg.sender is the owner
-endmodule
-```
-
-### Explanation of the Rule:
-
-- `syntax Exp ::= "withdraw" "(" Exp "," Exp ")" [function]`: This declares that the `withdraw` function takes two arguments: an amount (`Amt`) and a user address.
-- The rule `<k> withdraw(Amt, _) => . ... </k>` means that the withdrawal operation will only be executed under specific conditions that we’ll define.
-- The condition `<env> .[msg.sender] = owner </env>` ensures that the function only executes if `msg.sender` (the address of the caller) is equal to the `owner`. If this condition is not met, the withdrawal will not happen.
 
 ### Step 3: K Rule for Verifying Access Control
 
@@ -68,41 +53,6 @@ module ACCESS_CONTROL
        <env> .[msg.sender] = owner </env>
 endmodule
 ```
-
-
-
-### K Rule for Access Control
-
-```k
-module ACCESS_CONTROL
-  syntax Exp ::= "withdraw" "(" Exp "," Exp ")"  [function]
-  rule <k> withdraw(Amt, _) => . ... </k>
-       <env> .[msg.sender] = owner </env> 
-endmodule
-```
-
-## Setting Up the K Framework
-
-### Prerequisites
-
-1. Install the K Framework by following the instructions at: https://kframework.org/.
-2. Install the required dependencies using `make` or `k` commands.
-
-### Verifying the Contract
-
-1. Write the vulnerable Solidity contract in a file named `Vulnerable.sol`.
-2. Define the K rule for access control in a separate `.k` file.
-3. Use the K Framework to run formal verification and test if unauthorized users are prevented from calling `withdraw()`.
-
-```bash
-$ k run vulnerable_contract.k
-```
-
-### Next Steps
-
-- Add additional security features (e.g., `onlyOwner` modifier) to your contract.
-- Extend the K rule for more sophisticated checks (e.g., handling contract state and events).
-- Perform further analysis to detect potential vulnerabilities and errors in your Solidity contracts.
 
 Code for the K Framework Implementation:
 ```
