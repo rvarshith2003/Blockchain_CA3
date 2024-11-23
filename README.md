@@ -104,9 +104,6 @@ $ k run vulnerable_contract.k
 - Extend the K rule for more sophisticated checks (e.g., handling contract state and events).
 - Perform further analysis to detect potential vulnerabilities and errors in your Solidity contracts.
 
-## License
-
-This repository is licensed under the MIT License. See `LICENSE` for details.
 Code for the K Framework Implementation:
 ```
 // SPDX-License-Identifier: MIT
