@@ -12,7 +12,7 @@ We will:
 ### Step 1: Vulnerable Solidity Contract
 
 Here is an example of a vulnerable Solidity contract where any user can call the `withdraw()` function, potentially leading to unauthorized fund withdrawals.
-
+```
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
@@ -34,7 +34,7 @@ contract VulnerableWallet {
         balance -= amount;
     }
 }
-
+```
 In this contract, the `withdraw()` function can be called by anyone who has a balance. This is a vulnerability because it lacks a restriction for the contract owner. Now, we need to create a K rule to ensure only the contract owner can execute the `withdraw()` function.
 
 ### Step 2: K Rule for Access Control
@@ -108,6 +108,7 @@ $ k run vulnerable_contract.k
 
 This repository is licensed under the MIT License. See `LICENSE` for details.
 Code for the K Framework Implementation:
+```
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
@@ -134,7 +135,7 @@ contract SecureWallet {
         balance -= amount;
     }
 }
-
+```
 ### Conclusion
 
 In this guide, we created a vulnerable Solidity contract with an unprotected `withdraw()` function, then demonstrated how to use the K Framework to enforce that only the contract owner can access this function. The K rule checks that `msg.sender` is the contract owner before proceeding with the withdrawal, which ensures proper access control.
